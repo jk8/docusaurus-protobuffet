@@ -20,6 +20,8 @@ export interface PluginOptions {
   sidebarPath: string;
   // URL route for the docs section of your site.
   routeBasePath: string;
+  // Optional: Path to the custom document template file. The template uses the Handlebars format.
+  templatePath?: string;
 }
 
 export function validateOptions({
@@ -29,7 +31,8 @@ export function validateOptions({
   options: PluginOptions;
   validate: () => void;
 }): PluginOptions {
-  const { fileDescriptorsPath, protoDocsPath, sidebarPath } = options;
+  const { fileDescriptorsPath, protoDocsPath, sidebarPath, templatePath } =
+    options;
 
   // fileDescriptorsPath is an existing json file
   if (!fileDescriptorsPath || !existsSync(fileDescriptorsPath)) {
@@ -49,6 +52,13 @@ export function validateOptions({
   // sidebarPath is a present file
   if (!sidebarPath) {
     throw new Error("Expected sidebarPath option to reference a file.");
+  }
+
+  // templatePath is optional, but when set, check if the file exists
+  if (templatePath && !existsSync(templatePath)) {
+    throw new Error(
+      `Could not find the template file "${templatePath}" referenced in option templatePath.`
+    );
   }
 
   return options;
@@ -75,8 +85,13 @@ export default function plugin(
             options.routeBasePath
           );
 
+          // read a document template file
+          const template = options.templatePath
+            ? readFileSync(options.templatePath).toString()
+            : undefined;
+
           // generate markdown files for each in fileDescriptors
-          const docFiles = generateDocFiles(fileDescriptors);
+          const docFiles = generateDocFiles(fileDescriptors, template);
 
           // write files to appropriate directories
           docFiles.forEach((docFile) => {
