@@ -1,6 +1,6 @@
 {
   "name": "@jk8/docusaurus-protobuffet",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "description": "Protobuf documentation toolset for Docusaurus",
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
   "author": "Anthony Bobsin",
   "license": "ISC",
   "dependencies": {
-    "@jk8/docusaurus-protobuffet-plugin": "^0.3.4"
+    "@jk8/docusaurus-protobuffet-plugin": "^0.4.0"
   },
   "devDependencies": {
     "@docusaurus/types": "^2.0.0-alpha.72"
