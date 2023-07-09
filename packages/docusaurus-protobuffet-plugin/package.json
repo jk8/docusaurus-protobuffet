@@ -1,5 +1,5 @@
 {
-  "name": "docusaurus-protobuffet-plugin",
+  "name": "@jk8/docusaurus-protobuffet-plugin",
   "version": "0.3.3",
   "description": "Protobuf documentation plugin for Docusaurus",
   "author": "Anthony Bobsin",

@@ -1,5 +1,5 @@
 {
-  "name": "docusaurus-protobuffet-root",
+  "name": "@jk8/docusaurus-protobuffet-root",
   "private": true,
   "devDependencies": {
     "@types/node": "^14.14.37",
